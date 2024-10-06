@@ -63,6 +63,24 @@ function getCenterY() {
     return Math.round(window.displayAtWork[0].height/2);
 }
 
+function bubbleSort(list) {
+    let n = list.length;
+    let swapped;
+    do {
+        swapped = false;
+        for (let i = 0; i < n - 1; i++) {
+            if (list[i][0] < list[i + 1][0]) {
+                let temp = list[i];
+                list[i] = list[i + 1];
+                list[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        n--;
+    } while (swapped);
+    return list;
+}
+
 function doPixel(coord, colour) {
     window.displayAtWork[1].strokeStyle = colour;
     window.displayAtWork[1].strokeRect(coord[0], coord[1], 1, 1);
@@ -85,6 +103,20 @@ function doSprite(elem1, coord, scale) {
         }
     }
 }
+
+/*function doSide(elem1, coord, points) {
+    let ratio = [Math.abs(points[0][0])+Math.abs(points[1][0])/elem1[0],]
+    i = 2;
+    for (let x = 0; x != elem1[0]*scale[0]; x=x+scale[0]) {
+        for (let y = 0; y != elem1[1]*scale[1]; y=y+scale[1]) {
+            if (elem1[i][0]+elem1[i][1]+elem1[i][2] != 0) {
+                doSquare([coord[0]+x,coord[1]+y],"rgb("+elem1[i][0]+","+elem1[i][1]+","+elem1[i][2]+")",[scale[0],scale[1]]);
+            }
+            else null;
+            i++;
+        }
+    }
+}*/
 
 function translateX(x, z, pos) {
     return ((x + pos) + (z * (x / perspective)));
